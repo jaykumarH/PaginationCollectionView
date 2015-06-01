@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="6751" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" variant="6xAndEarlier" propertyAccessControl="none" useAutolayout="YES" promptedForUpgradeToXcode5="NO" initialViewController="fRE-Zu-kz0">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" variant="6xAndEarlier" propertyAccessControl="none" useAutolayout="YES" promptedForUpgradeToXcode5="NO" initialViewController="fRE-Zu-kz0">
     <dependencies>
         <deployment identifier="iOS"/>
         <development version="4600" identifier="xcode"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -14,6 +14,7 @@
                     <collectionView key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" id="qz2-8m-61Y">
                         <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Yxe-kT-7bn">
                             <size key="itemSize" width="320" height="300"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -29,9 +30,9 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" tag="100" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2qL-Hb-mxC">
-                                            <rect key="frame" x="10" y="8" width="300" height="300"/>
+                                            <rect key="frame" x="0.0" y="8" width="320" height="300"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="300" type="user" id="P7B-W1-8uk"/>
+                                                <constraint firstAttribute="width" constant="320" type="user" id="P7B-W1-8uk"/>
                                                 <constraint firstAttribute="height" constant="300" type="user" id="dSY-xR-Ajp"/>
                                             </constraints>
                                         </imageView>
@@ -40,7 +41,7 @@
                                 </view>
                                 <constraints>
                                     <constraint firstItem="2qL-Hb-mxC" firstAttribute="top" secondItem="9AK-Ef-bEQ" secondAttribute="topMargin" type="default" id="Rnb-az-TI0"/>
-                                    <constraint firstItem="2qL-Hb-mxC" firstAttribute="leading" secondItem="9AK-Ef-bEQ" secondAttribute="leading" constant="10" type="user" id="edj-AT-dLs"/>
+                                    <constraint firstItem="2qL-Hb-mxC" firstAttribute="leading" secondItem="9AK-Ef-bEQ" secondAttribute="leading" type="user" id="edj-AT-dLs"/>
                                 </constraints>
                             </collectionViewCell>
                         </cells>

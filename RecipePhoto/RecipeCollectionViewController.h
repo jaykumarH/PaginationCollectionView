@@ -10,5 +10,5 @@
 
 @interface RecipeCollectionViewController : UICollectionViewController
 @property (strong, nonatomic) IBOutlet UICollectionView *collectionViewObj;
-//file created
+@property(strong,nonatomic) IBOutlet UIPageControl *pageControl;
 @end
