@@ -139,6 +139,6 @@
 {
     CGFloat pageWidth = self.collectionViewObj.frame.size.width;
     self.pageControl.currentPage = self.collectionViewObj.contentOffset.x / pageWidth;
-    pageCount=self.pageControl.currentPage;
+    pageCount=(int)self.pageControl.currentPage;
 }
 @end
