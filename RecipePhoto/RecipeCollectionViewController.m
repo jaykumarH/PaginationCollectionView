@@ -20,7 +20,6 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
     }
     return self;
     
@@ -30,7 +29,8 @@
 {
     [super viewDidLoad];
     // Initialize recipe image array
-    
+    self.title=@"Recipe Photo";
+
     recipeImages = [NSArray arrayWithObjects:@"angry_birds_cake.jpg", @"creme_brelee.jpg", @"egg_benedict.jpg", @"full_breakfast.jpg", @"green_tea.jpg", @"ham_and_cheese_panini.jpg", @"ham_and_egg_sandwich.jpg", @"hamburger.jpg", @"instant_noodle_with_egg.jpg", @"japanese_noodle_with_pork.jpg", @"mushroom_risotto.jpg", @"noodle_with_bbq_pork.jpg", @"starbucks_coffee.jpg", @"thai_shrimp_cake.jpg", @"vegetable_curry.jpg", @"white_chocolate_donut.jpg", nil];
     
     [self setUpPageControl];
@@ -67,7 +67,7 @@
     CGFloat h = self.view.frame.size.height;
     
     // Set up the page control
-    CGRect frame = CGRectMake(0, h - 30, w, 36);
+    CGRect frame = CGRectMake(0, h - 20, w, 20);
     self.pageControl = [[UIPageControl alloc]
                         initWithFrame:frame
                         ];
@@ -82,14 +82,14 @@
 - (void)pageControlChanged:(id)sender
 {
     UIPageControl *pageControl = sender;
-    CGFloat pageWidth = self.collectionView.frame.size.width;
+    CGFloat pageWidth = self.collectionViewObj.frame.size.width;
     CGPoint scrollTo = CGPointMake(pageWidth * pageControl.currentPage, 0);
-    [self.collectionView setContentOffset:scrollTo animated:YES];
+    [self.collectionViewObj setContentOffset:scrollTo animated:YES];
 }
 #pragma mark -Scroll view delegates
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
-    CGFloat pageWidth = self.collectionView.frame.size.width;
-    self.pageControl.currentPage = self.collectionView.contentOffset.x / pageWidth;
+    CGFloat pageWidth = self.collectionViewObj.frame.size.width;
+    self.pageControl.currentPage = self.collectionViewObj.contentOffset.x / pageWidth;
 }
 @end
