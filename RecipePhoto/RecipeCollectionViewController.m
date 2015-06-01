@@ -90,7 +90,7 @@
 {
     UIPageControl *pageControl = sender;
     CGFloat pageWidth = self.collectionViewObj.frame.size.width;
-    CGPoint scrollTo = CGPointMake(pageWidth * pageControl.currentPage,0);
+    CGPoint scrollTo = CGPointMake(pageWidth * pageControl.currentPage,self.collectionViewObj.contentOffset.y);
     [self.collectionViewObj setContentOffset:scrollTo animated:YES];
 }
 #pragma mark -Scroll view delegates
