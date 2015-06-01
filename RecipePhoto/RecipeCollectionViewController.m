@@ -34,6 +34,7 @@
     recipeImages = [NSArray arrayWithObjects:@"angry_birds_cake.jpg", @"creme_brelee.jpg", @"egg_benedict.jpg", @"full_breakfast.jpg", @"green_tea.jpg", @"ham_and_cheese_panini.jpg", @"ham_and_egg_sandwich.jpg", @"hamburger.jpg", @"instant_noodle_with_egg.jpg", @"japanese_noodle_with_pork.jpg", @"mushroom_risotto.jpg", @"noodle_with_bbq_pork.jpg", @"starbucks_coffee.jpg", @"thai_shrimp_cake.jpg", @"vegetable_curry.jpg", @"white_chocolate_donut.jpg", nil];
     
     [self setUpPageControl];
+ //   [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(handleTimer:) userInfo:self.pageControl repeats:YES];
 
 }
 
@@ -79,11 +80,17 @@
     self.pageControl.autoresizingMask = UIViewAutoresizingFlexibleHeight;
     [self.view addSubview:self.pageControl];
 }
+- (void)handleTimer:(NSTimer*)theTimer {
+    
+    NSLog (@"Got the string: %@", (NSString*)[theTimer userInfo]);
+    [self pageControlChanged:[theTimer userInfo]];
+    
+}
 - (void)pageControlChanged:(id)sender
 {
     UIPageControl *pageControl = sender;
     CGFloat pageWidth = self.collectionViewObj.frame.size.width;
-    CGPoint scrollTo = CGPointMake(pageWidth * pageControl.currentPage, 0);
+    CGPoint scrollTo = CGPointMake(pageWidth * pageControl.currentPage,0);
     [self.collectionViewObj setContentOffset:scrollTo animated:YES];
 }
 #pragma mark -Scroll view delegates
