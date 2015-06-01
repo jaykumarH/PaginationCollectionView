@@ -43,6 +43,7 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark -Collection View Data source and delegates
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     return recipeImages.count;
 }
@@ -59,6 +60,7 @@
     
     return cell;
 }
+#pragma mark -Custom Methods
 -(void)setUpPageControl
 {
     CGFloat w = self.view.frame.size.width;
@@ -84,6 +86,7 @@
     CGPoint scrollTo = CGPointMake(pageWidth * pageControl.currentPage, 0);
     [self.collectionView setContentOffset:scrollTo animated:YES];
 }
+#pragma mark -Scroll view delegates
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
     CGFloat pageWidth = self.collectionView.frame.size.width;
