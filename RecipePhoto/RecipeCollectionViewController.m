@@ -14,7 +14,7 @@
     UIImageView *leftSlider;
     UIImageView *rightSlider;
     NSTimer *timer;
-
+    UILabel *recipeLabel;
 }
 
 @end
@@ -35,7 +35,7 @@
     [super viewDidLoad];
     // Initialize recipe image array
     self.title=@"Recipe Photo";
-
+    
     recipeImages = [NSArray arrayWithObjects:@"angry_birds_cake.jpg", @"creme_brelee.jpg", @"egg_benedict.jpg", @"full_breakfast.jpg", @"green_tea.jpg", @"ham_and_cheese_panini.jpg", @"ham_and_egg_sandwich.jpg", @"hamburger.jpg", @"instant_noodle_with_egg.jpg", @"japanese_noodle_with_pork.jpg", @"mushroom_risotto.jpg", @"noodle_with_bbq_pork.jpg", @"starbucks_coffee.jpg", @"thai_shrimp_cake.jpg", @"vegetable_curry.jpg", @"white_chocolate_donut.jpg", nil];
     pageCount=0;
     self.collectionViewObj.userInteractionEnabled=YES;
@@ -55,8 +55,6 @@
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     return recipeImages.count;
 }
-
-
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *identifier = @"Cell";
     
@@ -104,6 +102,11 @@
     [self.view addSubview:leftSlider];
     leftSlider.hidden=YES;
     rightSlider.hidden=YES;
+    recipeLabel=[[UILabel alloc]initWithFrame:CGRectMake(0, self.collectionViewObj.frame.size.height/2-120, self.collectionViewObj.frame.size.width, 30)];
+    recipeLabel.textAlignment=NSTextAlignmentCenter;
+    recipeLabel.textColor=[UIColor darkGrayColor];
+    recipeLabel.backgroundColor=[UIColor orangeColor];
+    [self.view addSubview:recipeLabel];
     
 }
 - (void)handleTimer:(NSTimer*)theTimer {
@@ -129,6 +132,8 @@
         CGPoint scrollTo = CGPointMake(pageWidth * self.pageControl.currentPage,self.collectionViewObj.contentOffset.y);
         [self.collectionViewObj setContentOffset:scrollTo animated:YES];
     }
+    recipeLabel.text=[recipeImages objectAtIndex:self.pageControl.currentPage];
+
 }
 -(void)leftSliderTapped
 {
@@ -140,6 +145,8 @@
         CGPoint scrollTo = CGPointMake(pageWidth * self.pageControl.currentPage,self.collectionViewObj.contentOffset.y);
         [self.collectionViewObj setContentOffset:scrollTo animated:YES];
     }
+    recipeLabel.text=[recipeImages objectAtIndex:self.pageControl.currentPage];
+
 }
 -(void)automateSliders
 {
@@ -158,16 +165,7 @@
         timer=nil;
     }
 }
-//- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-//    
-//    UITouch *touch = [[event allTouches] anyObject];
-//    CGPoint touchLocation = [touch locationInView:touch.view];
-//    if ([[touch.view class] isSubclassOfClass:[UICollectionViewCell class]]) {
-//        [self inValidateTimer];
-//    }
-//    
-//    
-//}
+
 #pragma mark -Scroll view delegates
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
@@ -178,5 +176,6 @@
         leftSlider.hidden=NO;
         rightSlider.hidden=NO;
     }
+    recipeLabel.text=[recipeImages objectAtIndex:self.pageControl.currentPage];
   }
 @end
