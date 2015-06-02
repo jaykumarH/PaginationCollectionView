@@ -102,6 +102,9 @@
     [self.view addSubview:leftSlider];
     leftSlider.hidden=YES;
     rightSlider.hidden=YES;
+    leftSlider.alpha=0;
+    rightSlider.alpha=0;
+    
     recipeLabel=[[UILabel alloc]initWithFrame:CGRectMake(0, self.collectionViewObj.frame.size.height/2-120, self.collectionViewObj.frame.size.width, 30)];
     recipeLabel.textAlignment=NSTextAlignmentCenter;
     recipeLabel.textColor=[UIColor darkGrayColor];
@@ -176,8 +179,13 @@
     self.pageControl.currentPage = self.collectionViewObj.contentOffset.x / pageWidth;
     pageCount=(int)self.pageControl.currentPage;
     if (leftSlider.hidden==YES && rightSlider.hidden==YES) {
-        leftSlider.hidden=NO;
-        rightSlider.hidden=NO;
+
+        [UIView animateWithDuration:1.0 animations:^{
+            leftSlider.hidden=NO;
+            rightSlider.hidden=NO;
+            leftSlider.alpha=1.0;
+            rightSlider.alpha=1.0;
+        } completion:nil];
     }
     recipeLabel.text=[recipeImages objectAtIndex:self.pageControl.currentPage];
   }
