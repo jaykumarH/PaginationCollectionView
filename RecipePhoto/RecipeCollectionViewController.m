@@ -106,6 +106,7 @@
     recipeLabel.textAlignment=NSTextAlignmentCenter;
     recipeLabel.textColor=[UIColor darkGrayColor];
     recipeLabel.backgroundColor=[UIColor orangeColor];
+    recipeLabel.text=[recipeImages objectAtIndex:0];
     [self.view addSubview:recipeLabel];
     
 }
@@ -122,6 +123,8 @@
     pageCount=(int)pageControl.currentPage;
     CGPoint scrollTo = CGPointMake(pageWidth * pageControl.currentPage,self.collectionViewObj.contentOffset.y);
     [self.collectionViewObj setContentOffset:scrollTo animated:YES];
+    recipeLabel.text=[recipeImages objectAtIndex:self.pageControl.currentPage];
+
 }
 -(void)rightSliderTapped
 {
