@@ -77,7 +77,7 @@
                         ];
     self.pageControl.backgroundColor=[UIColor orangeColor];
     self.pageControl.pageIndicatorTintColor=[UIColor darkGrayColor];
-    self.pageControl.currentPageIndicatorTintColor=[UIColor blackColor];
+    self.pageControl.currentPageIndicatorTintColor=[UIColor whiteColor];
     [self.pageControl addTarget:self action:@selector(pageControlChanged:) forControlEvents:UIControlEventValueChanged];
     self.pageControl.numberOfPages = [recipeImages count];
     self.pageControl.autoresizingMask = UIViewAutoresizingFlexibleHeight;
@@ -106,7 +106,7 @@
     // add recipe label
     recipeLabel=[[UILabel alloc]initWithFrame:CGRectMake(0, self.collectionViewObj.frame.size.height/2-130, self.collectionViewObj.frame.size.width, 30)];
     recipeLabel.textAlignment=NSTextAlignmentCenter;
-    recipeLabel.textColor=[UIColor darkGrayColor];
+    recipeLabel.textColor=[UIColor whiteColor];
     recipeLabel.backgroundColor=[UIColor orangeColor];
     recipeLabel.text=[recipeImages objectAtIndex:0];
     [self.view addSubview:recipeLabel];
@@ -152,11 +152,8 @@
 #pragma mark -Scroll view delegates
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
-    CGFloat pageWidth = self.collectionViewObj.frame.size.width;
-    self.pageControl.currentPage = self.collectionViewObj.contentOffset.x / pageWidth;
-    pageCount=(int)self.pageControl.currentPage;
     if (leftSlider.hidden==YES && rightSlider.hidden==YES) {
-
+        
         [UIView animateWithDuration:1.0 animations:^{
             leftSlider.hidden=NO;
             rightSlider.hidden=NO;
@@ -164,6 +161,9 @@
             rightSlider.alpha=1.0;
         } completion:nil];
     }
+    CGFloat pageWidth = self.collectionViewObj.frame.size.width;
+    self.pageControl.currentPage = self.collectionViewObj.contentOffset.x / pageWidth;
+    pageCount=(int)self.pageControl.currentPage;
     recipeLabel.text=[recipeImages objectAtIndex:self.pageControl.currentPage];
   }
 @end
