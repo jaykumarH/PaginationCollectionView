@@ -11,6 +11,10 @@
 @interface RecipeCollectionViewController () {
     NSArray *recipeImages;
     int pageCount;
+    UIImageView *leftSlider;
+    UIImageView *rightSlider;
+    NSTimer *timer;
+
 }
 
 @end
@@ -34,9 +38,10 @@
 
     recipeImages = [NSArray arrayWithObjects:@"angry_birds_cake.jpg", @"creme_brelee.jpg", @"egg_benedict.jpg", @"full_breakfast.jpg", @"green_tea.jpg", @"ham_and_cheese_panini.jpg", @"ham_and_egg_sandwich.jpg", @"hamburger.jpg", @"instant_noodle_with_egg.jpg", @"japanese_noodle_with_pork.jpg", @"mushroom_risotto.jpg", @"noodle_with_bbq_pork.jpg", @"starbucks_coffee.jpg", @"thai_shrimp_cake.jpg", @"vegetable_curry.jpg", @"white_chocolate_donut.jpg", nil];
     pageCount=0;
+    self.collectionViewObj.userInteractionEnabled=YES;
     [self setUpPageControl];
     [self setUpSliderArrows];
- //   [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(handleTimer:) userInfo:self.pageControl repeats:YES];
+   //   timer=[NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(automateSliders) userInfo:self.pageControl repeats:YES];
 
 }
 
@@ -85,18 +90,20 @@
 }
 -(void)setUpSliderArrows
 {
-    UIImageView *rightSlider=[[UIImageView alloc] initWithFrame:CGRectMake(self.collectionViewObj.frame.size.width-30, self.collectionViewObj.frame.size.height/2, 30, 30)];
+    rightSlider=[[UIImageView alloc] initWithFrame:CGRectMake(self.collectionViewObj.frame.size.width-30, self.collectionViewObj.frame.size.height/2, 30, 30)];
     rightSlider.image=[UIImage imageNamed:@"right.png"];
     rightSlider.userInteractionEnabled=YES;
     UITapGestureRecognizer *rightTap=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(rightSliderTapped)];
     [rightSlider addGestureRecognizer:rightTap];
     [self.view addSubview:rightSlider];
-    UIImageView *leftSlider=[[UIImageView alloc] initWithFrame:CGRectMake(5, self.collectionViewObj.frame.size.height/2, 30, 30)];
+    leftSlider=[[UIImageView alloc] initWithFrame:CGRectMake(5, self.collectionViewObj.frame.size.height/2, 30, 30)];
+    leftSlider.image=[UIImage imageNamed:@"left.png"];
     leftSlider.userInteractionEnabled=YES;
     UITapGestureRecognizer *leftTap=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(leftSliderTapped)];
     [leftSlider addGestureRecognizer:leftTap];
-    leftSlider.image=[UIImage imageNamed:@"left.png"];
     [self.view addSubview:leftSlider];
+    leftSlider.hidden=YES;
+    rightSlider.hidden=YES;
     
 }
 - (void)handleTimer:(NSTimer*)theTimer {
@@ -134,11 +141,42 @@
         [self.collectionViewObj setContentOffset:scrollTo animated:YES];
     }
 }
+-(void)automateSliders
+{
+    if (pageCount!=recipeImages.count) {
+        [self rightSliderTapped];
+    }
+    else
+    {
+        [self inValidateTimer];
+    }
+}
+-(void)inValidateTimer
+{
+    if ([timer isValid]) {
+        [timer invalidate];
+        timer=nil;
+    }
+}
+//- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+//    
+//    UITouch *touch = [[event allTouches] anyObject];
+//    CGPoint touchLocation = [touch locationInView:touch.view];
+//    if ([[touch.view class] isSubclassOfClass:[UICollectionViewCell class]]) {
+//        [self inValidateTimer];
+//    }
+//    
+//    
+//}
 #pragma mark -Scroll view delegates
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
     CGFloat pageWidth = self.collectionViewObj.frame.size.width;
     self.pageControl.currentPage = self.collectionViewObj.contentOffset.x / pageWidth;
     pageCount=(int)self.pageControl.currentPage;
-}
+    if (leftSlider.hidden==YES && rightSlider.hidden==YES) {
+        leftSlider.hidden=NO;
+        rightSlider.hidden=NO;
+    }
+  }
 @end
