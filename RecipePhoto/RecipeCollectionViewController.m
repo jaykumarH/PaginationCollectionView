@@ -41,8 +41,6 @@
     self.collectionViewObj.userInteractionEnabled=YES;
     [self setUpPageControl];
     [self setUpSliderArrows];
-   //   timer=[NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(automateSliders) userInfo:self.pageControl repeats:YES];
-
 }
 
 - (void)didReceiveMemoryWarning
@@ -105,7 +103,8 @@
     leftSlider.alpha=0;
     rightSlider.alpha=0;
     
-    recipeLabel=[[UILabel alloc]initWithFrame:CGRectMake(0, self.collectionViewObj.frame.size.height/2-120, self.collectionViewObj.frame.size.width, 30)];
+    // add recipe label
+    recipeLabel=[[UILabel alloc]initWithFrame:CGRectMake(0, self.collectionViewObj.frame.size.height/2-130, self.collectionViewObj.frame.size.width, 30)];
     recipeLabel.textAlignment=NSTextAlignmentCenter;
     recipeLabel.textColor=[UIColor darkGrayColor];
     recipeLabel.backgroundColor=[UIColor orangeColor];
@@ -113,12 +112,7 @@
     [self.view addSubview:recipeLabel];
     
 }
-- (void)handleTimer:(NSTimer*)theTimer {
-    
-    NSLog (@"Got the string: %@", (NSString*)[theTimer userInfo]);
-    [self pageControlChanged:[theTimer userInfo]];
-    
-}
+
 - (void)pageControlChanged:(id)sender
 {
     UIPageControl *pageControl = sender;
@@ -153,23 +147,6 @@
     }
     recipeLabel.text=[recipeImages objectAtIndex:self.pageControl.currentPage];
 
-}
--(void)automateSliders
-{
-    if (pageCount!=recipeImages.count) {
-        [self rightSliderTapped];
-    }
-    else
-    {
-        [self inValidateTimer];
-    }
-}
--(void)inValidateTimer
-{
-    if ([timer isValid]) {
-        [timer invalidate];
-        timer=nil;
-    }
 }
 
 #pragma mark -Scroll view delegates
